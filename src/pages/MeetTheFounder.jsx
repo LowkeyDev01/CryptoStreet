@@ -6,6 +6,7 @@ import {
     FaLinkedinIn,
     FaTiktok,
 } from "react-icons/fa6";
+import Zoey from "../assets/zoey.png";
 
 export default function MeetTheFounder() {
 
@@ -49,8 +50,11 @@ export default function MeetTheFounder() {
                 >
 
                     <div className="aspect-[4/5] w-full max-w-[400px] overflow-hidden rounded-2xl bg-pink-50">
-
-                        {/* IMAGE GOES HERE */}
+                            <img
+                                src={Zoey}
+                                alt="Zoey, Founder of Crypto Street"
+                                className="h-full w-full object-cover"
+                            />
 
                     </div>
 
@@ -227,41 +231,63 @@ export default function MeetTheFounder() {
                     >
 
                         <motion.a
-                            href="#"
-                            whileHover={{ y: -2 }}
+                            href="https://x.com/zoey_thefirst"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{
+                                y: -2,
+                            }}
                             className="flex items-center gap-2 transition-colors duration-200 hover:text-pink-500"
                         >
                             <FaXTwitter className="text-lg text-black" />
                             <p>Twitter</p>
                         </motion.a>
 
+
                         <div className="h-5 w-[1px] bg-black/10"></div>
 
+
                         <motion.a
-                            href="#"
-                            whileHover={{ y: -2 }}
+                            href="https://www.instagram.com/zoey_thefirst1/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{
+                                y: -2,
+                            }}
                             className="flex items-center gap-2 transition-colors duration-200 hover:text-pink-500"
                         >
                             <FaInstagram className="text-lg text-black" />
                             <p>Instagram</p>
                         </motion.a>
 
+
                         <div className="hidden h-5 w-[1px] bg-black/10 sm:block"></div>
 
+
                         <motion.a
-                            href="#"
-                            whileHover={{ y: -2 }}
+                            href="https://www.linkedin.com/in/zoey-ola%F0%9F%8C%8E-b48512298"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{
+                                y: -2,
+                            }}
                             className="flex items-center gap-2 transition-colors duration-200 hover:text-pink-500"
                         >
                             <FaLinkedinIn className="text-lg text-black" />
                             <p>LinkedIn</p>
                         </motion.a>
 
+
                         <div className="h-5 w-[1px] bg-black/10"></div>
 
+
                         <motion.a
-                            href="#"
-                            whileHover={{ y: -2 }}
+                            href="https://www.tiktok.com/@zoey_thefirst1"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{
+                                y: -2,
+                            }}
                             className="flex items-center gap-2 transition-colors duration-200 hover:text-pink-500"
                         >
                             <FaTiktok className="text-lg text-black" />

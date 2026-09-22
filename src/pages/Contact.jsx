@@ -153,6 +153,7 @@ export default function Contact() {
                                 </div>
 
                                 <div className="font-six">
+
                                     <p className="text-xs font-semibold">
                                         Email
                                     </p>
@@ -163,6 +164,7 @@ export default function Contact() {
                                     >
                                         hello@cryptostreet.africa
                                     </a>
+
                                 </div>
 
                             </motion.div>
@@ -190,6 +192,7 @@ export default function Contact() {
                                 </div>
 
                                 <div className="font-six">
+
                                     <p className="text-xs font-semibold">
                                         Location
                                     </p>
@@ -197,6 +200,7 @@ export default function Contact() {
                                     <p className="mt-1 text-xs text-black/50">
                                         Lagos, Nigeria
                                     </p>
+
                                 </div>
 
                             </motion.div>
@@ -232,32 +236,48 @@ export default function Contact() {
                                     <div className="mt-3 flex items-center gap-5 text-lg">
 
                                         <motion.a
-                                            href="#"
-                                            whileHover={{ y: -2 }}
+                                            href="https://x.com/zoey_thefirst"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            whileHover={{
+                                                y: -2,
+                                            }}
                                             className="transition-colors duration-200 hover:text-pink-500"
                                         >
                                             <FaXTwitter />
                                         </motion.a>
 
                                         <motion.a
-                                            href="#"
-                                            whileHover={{ y: -2 }}
+                                            href="https://www.instagram.com/zoey_thefirst1/"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            whileHover={{
+                                                y: -2,
+                                            }}
                                             className="transition-colors duration-200 hover:text-pink-500"
                                         >
                                             <FaInstagram />
                                         </motion.a>
 
                                         <motion.a
-                                            href="#"
-                                            whileHover={{ y: -2 }}
+                                            href="https://www.linkedin.com/in/zoey-ola%F0%9F%8C%8E-b48512298"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            whileHover={{
+                                                y: -2,
+                                            }}
                                             className="transition-colors duration-200 hover:text-pink-500"
                                         >
                                             <FaLinkedinIn />
                                         </motion.a>
 
                                         <motion.a
-                                            href="#"
-                                            whileHover={{ y: -2 }}
+                                            href="https://www.tiktok.com/@zoey_thefirst1"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            whileHover={{
+                                                y: -2,
+                                            }}
                                             className="transition-colors duration-200 hover:text-pink-500"
                                         >
                                             <FaTiktok />
@@ -327,6 +347,7 @@ export default function Contact() {
 
                                     <input
                                         id="name"
+                                        name="name"
                                         type="text"
                                         placeholder="Your name"
                                         className="mt-1 w-full bg-transparent font-six text-xs outline-none placeholder:text-black/30"
@@ -346,6 +367,7 @@ export default function Contact() {
 
                                     <input
                                         id="email"
+                                        name="email"
                                         type="email"
                                         placeholder="you@company.com"
                                         className="mt-1 w-full bg-transparent font-six text-xs outline-none placeholder:text-black/30"
@@ -368,9 +390,11 @@ export default function Contact() {
 
                                 <select
                                     id="subject"
+                                    name="subject"
                                     defaultValue=""
                                     className="mt-1 w-full cursor-pointer bg-transparent font-six text-xs text-black/50 outline-none"
                                 >
+
                                     <option value="" disabled>
                                         What’s this about?
                                     </option>
@@ -390,6 +414,7 @@ export default function Contact() {
                                     <option value="other">
                                         Other
                                     </option>
+
                                 </select>
 
                             </div>
@@ -407,6 +432,7 @@ export default function Contact() {
 
                                 <textarea
                                     id="message"
+                                    name="message"
                                     rows="5"
                                     placeholder="Tell us more..."
                                     className="mt-2 w-full resize-none bg-transparent font-six text-xs leading-5 outline-none placeholder:text-black/30"
@@ -518,7 +544,7 @@ export default function Contact() {
 
                         {/* BACK TO TOP */}
                         <motion.a
-                            href="#"
+                            href="#home"
                             whileHover={{
                                 y: -2,
                             }}
