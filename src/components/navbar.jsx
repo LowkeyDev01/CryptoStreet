@@ -1,71 +1,153 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { GoArrowUpRight } from "react-icons/go";
+
 import Logo from "../assets/Logo.png";
 
 export default function NavBar() {
 
     const [menuOpen, setMenuOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState("home");
+
+    const navItems = [
+        {
+            name: "Home",
+            id: "home",
+        },
+        {
+            name: "About",
+            id: "about",
+        },
+        {
+            name: "Episodes",
+            id: "episodes",
+        },
+        {
+            name: "Meet the Founder",
+            id: "founder",
+        },
+        {
+            name: "Contact",
+            id: "contact",
+        },
+    ];
+
 
     const closeMenu = () => {
         setMenuOpen(false);
     };
 
+
+    useEffect(() => {
+
+        const sections = navItems
+            .map((item) => document.getElementById(item.id))
+            .filter(Boolean);
+
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+
+                const visibleSections = entries
+                    .filter((entry) => entry.isIntersecting)
+                    .sort(
+                        (a, b) =>
+                            b.intersectionRatio - a.intersectionRatio
+                    );
+
+
+                if (visibleSections.length > 0) {
+                    setActiveSection(
+                        visibleSections[0].target.id
+                    );
+                }
+
+            },
+            {
+                root: null,
+                rootMargin: "-25% 0px -55% 0px",
+                threshold: [0, 0.1, 0.25, 0.5, 0.75],
+            }
+        );
+
+
+        sections.forEach((section) => {
+            observer.observe(section);
+        });
+
+
+        return () => {
+            sections.forEach((section) => {
+                observer.unobserve(section);
+            });
+        };
+
+    }, []);
+
+
     return (
-        <nav className="fixed top-0 z-100 w-full bg-white/10 font-six backdrop-blur-md">
+        <nav className="fixed top-0 z-100 w-full font-six backdrop-blur-md">
 
             {/* NAVBAR */}
             <div className="grid w-full grid-cols-2 items-center px-5 py-2 md:grid-cols-3 md:px-10">
 
+
                 {/* LOGO */}
                 <div className="flex items-center">
+
                     <a href="#home">
+
                         <img
                             src={Logo}
                             alt="Crypto Street"
                             className="w-16"
                         />
+
                     </a>
+
                 </div>
 
 
                 {/* DESKTOP LINKS */}
                 <div className="hidden items-center justify-center gap-9 text-xs text-black/90 md:flex">
 
-                    <a
-                        href="#home"
-                        className="text-pink-500"
-                    >
-                        Home
-                    </a>
+                    {navItems.map((item) => (
 
-                    <a
-                        href="#about"
-                        className="duration-200 hover:text-pink-500"
-                    >
-                        About
-                    </a>
+                        <a
+                            key={item.id}
+                            href={`#${item.id}`}
+                            className={`relative whitespace-nowrap py-2 transition-colors duration-300 ${
+                                activeSection === item.id
+                                    ? "text-pink-500"
+                                    : "hover:text-pink-500"
+                            }`}
+                        >
 
-                    <a
-                        href="#episodes"
-                        className="duration-200 hover:text-pink-500"
-                    >
-                        Episodes
-                    </a>
+                            <p>
+                                {item.name}
+                            </p>
 
-                    <a
-                        href="#founder"
-                        className="whitespace-nowrap duration-200 hover:text-pink-500"
-                    >
-                        Meet the Founder
-                    </a>
 
-                    <a
-                        href="#contact"
-                        className="duration-200 hover:text-pink-500"
-                    >
-                        Contact
-                    </a>
+                            {/* ACTIVE LINE */}
+                            {activeSection === item.id && (
+
+                                <motion.div
+                                    layoutId="activeNavLine"
+                                    className="absolute bottom-0 left-0 h-[1.5px] w-full bg-pink-500"
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 380,
+                                        damping: 30,
+                                    }}
+                                />
+
+                            )}
+
+                        </a>
+
+                    ))}
 
                 </div>
 
@@ -73,12 +155,16 @@ export default function NavBar() {
                 {/* RIGHT */}
                 <div className="flex items-center justify-end">
 
+
                     {/* DESKTOP CTA */}
                     <a
                         href="#contact"
                         className="hidden items-center gap-1 rounded-full bg-pink-500 px-6 py-2 text-xs text-white transition-transform duration-300 hover:scale-[1.03] md:flex"
                     >
-                        <p>Partner with Us</p>
+                        <p>
+                            Partner with Us
+                        </p>
+
                         <GoArrowUpRight />
                     </a>
 
@@ -88,7 +174,13 @@ export default function NavBar() {
                         onClick={() => setMenuOpen(!menuOpen)}
                         className="text-3xl md:hidden"
                     >
-                        {menuOpen ? <IoMdClose /> : <IoMdMenu />}
+
+                        {menuOpen ? (
+                            <IoMdClose />
+                        ) : (
+                            <IoMdMenu />
+                        )}
+
                     </button>
 
                 </div>
@@ -97,68 +189,70 @@ export default function NavBar() {
 
 
             {/* MOBILE MENU */}
-            <div
-                className={`overflow-hidden bg-white transition-all duration-300 md:hidden ${
-                    menuOpen
-                        ? "max-h-[500px] border-t border-black/5"
-                        : "max-h-0"
-                }`}
+            <motion.div
+                initial={false}
+                animate={{
+                    height: menuOpen ? "auto" : 0,
+                    opacity: menuOpen ? 1 : 0,
+                }}
+                transition={{
+                    duration: 0.3,
+                    ease: "easeInOut",
+                }}
+                className="overflow-hidden bg-white md:hidden"
             >
+
                 <div className="flex flex-col px-5 pb-6 pt-4 text-sm">
 
-                    <a
-                        href="#home"
-                        onClick={closeMenu}
-                        className="border-b border-black/5 py-4 text-pink-500"
-                    >
-                        Home
-                    </a>
+                    {navItems.map((item) => (
 
-                    <a
-                        href="#about"
-                        onClick={closeMenu}
-                        className="border-b border-black/5 py-4"
-                    >
-                        About
-                    </a>
+                        <a
+                            key={item.id}
+                            href={`#${item.id}`}
+                            onClick={closeMenu}
+                            className={`relative border-b border-black/5 py-4 transition-colors duration-200 ${
+                                activeSection === item.id
+                                    ? "text-pink-500"
+                                    : "text-black"
+                            }`}
+                        >
 
-                    <a
-                        href="#episodes"
-                        onClick={closeMenu}
-                        className="border-b border-black/5 py-4"
-                    >
-                        Episodes
-                    </a>
+                            <p className="w-fit">
+                                {item.name}
+                            </p>
 
-                    <a
-                        href="#founder"
-                        onClick={closeMenu}
-                        className="border-b border-black/5 py-4"
-                    >
-                        Meet the Founder
-                    </a>
 
-                    <a
-                        href="#contact"
-                        onClick={closeMenu}
-                        className="py-4"
-                    >
-                        Contact
-                    </a>
+                            {/* MOBILE ACTIVE LINE */}
+                            {activeSection === item.id && (
+
+                                <motion.div
+                                    layoutId="mobileActiveNavLine"
+                                    className="absolute bottom-0 left-0 h-[2px] w-10 bg-pink-500"
+                                />
+
+                            )}
+
+                        </a>
+
+                    ))}
 
 
                     {/* MOBILE CTA */}
                     <a
                         href="#contact"
                         onClick={closeMenu}
-                        className="mt-3 flex w-fit items-center gap-2 rounded-full bg-pink-500 px-6 py-3 text-xs text-white"
+                        className="mt-5 flex w-fit items-center gap-2 rounded-full bg-pink-500 px-6 py-3 text-xs text-white"
                     >
-                        <p>Partner with Us</p>
+                        <p>
+                            Partner with Us
+                        </p>
+
                         <GoArrowUpRight />
                     </a>
 
                 </div>
-            </div>
+
+            </motion.div>
 
         </nav>
     );
