@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fontdiner+Swanky&family=Inter:wght@400;700&family=Michroma&family=Outfit:wght@400;700&family=Risque&family=Space+Grotesk:wght@400;700&display=swap');
+
+@import "tailwindcss";
+
+.font-one {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.font-two {
+  font-family: "Risque", serif;
+}
+
+.font-three {
+  font-family: "Fontdiner Swanky", serif;
+}
+
+.font-four {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.font-five {
+  font-family: "Inter", sans-serif;
+}
+
+.font-six {
+  font-family: "Outfit", sans-serif;
+}
+
+.font-seven {
+  font-family: "Michroma", sans-serif;
+}
